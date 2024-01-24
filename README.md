@@ -1,7 +1,5 @@
 To do:
-monitoring() thread erstellt -> wie viel gegessen werden soll in ein array 
-reingeschrieben und jetzt muss man noch folgendes aendern:
--> monitoring bis anzahl von philos laufen lassen und wenn ALLE <= 0 sind dann abbrechen
+- arr (last_eaten) muss noch entsprechend befuellt werden
 
 Mutex:
 Def: Mechanismus um Resourcen zeitlich gesehen nacheinander zu teilen.
