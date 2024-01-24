@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/19 16:13:18 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:56:22 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 void	initialize(t_philo *philo, char *argv[])
 {
 	user_input(philo, argv);
+	size_t i;
+
+	i = 0;
+	if (philo->eat_count != -1)
+	{
+		while (i < philo->num_of_philos)
+		{
+			philo->meals_to_eat[i] = philo->eat_count;
+			i++;
+		}
+	}
 	initialize_mutexes(philo);
 	initialize_threads(philo);
 	join_threads(philo);

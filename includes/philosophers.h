@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/19 14:53:39 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/23 19:57:09 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ typedef struct s_philo
 	size_t			time_to_sleep;
 	pthread_mutex_t	time_to_sleep_mutex;
 
-	size_t			eat_count;
+	int				eat_count;
 
 	size_t			num_think;
 	pthread_mutex_t	philo_think_mutex;
 	pthread_mutex_t	fork[MAX_PHILOS];
 	size_t			start_time;
+	int		last_eaten[MAX_PHILOS];
+	int		meals_to_eat[MAX_PHILOS];
 }						t_philo;
 
 typedef struct s_philo_thread

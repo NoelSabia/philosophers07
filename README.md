@@ -1,6 +1,7 @@
 To do:
-- ab 99 philos tauchen komische zahlen auf bzw segfaultet (vllt kein fix noetig?)
-- monitoring() thread schon erstellt und auch gejoined aber sonst leer
+monitoring() thread erstellt -> wie viel gegessen werden soll in ein array 
+reingeschrieben und jetzt muss man noch folgendes aendern:
+-> monitoring bis anzahl von philos laufen lassen und wenn ALLE <= 0 sind dann abbrechen
 
 Mutex:
 Def: Mechanismus um Resourcen zeitlich gesehen nacheinander zu teilen.

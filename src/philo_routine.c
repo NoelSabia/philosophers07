@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:09 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/19 16:30:24 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/24 12:33:20 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ void	*philo_life(void *arg)
 	while (philo->philo_dead == 0)
 	{
 		philo_think(philo_thread, philo);
+		if (philo->philo_dead == 1)
+			return (NULL);
 		philo_eat(philo_thread, philo);
+		if (philo->philo_dead == 1)
+			return (NULL);
 		philo_sleep(philo_thread, philo);
+		if (philo->philo_dead == 1)
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -56,6 +62,7 @@ void	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 		pthread_mutex_unlock(&philo->fork[philo_thread->index]);
 		printf(ANSI_COLOR_BLUE"%zu %zu has dropped his fork"
 			ANSI_COLOR_RESET "\n", get_current_time() - philo->start_time, philo_thread->index);
+		philo->meals_to_eat[philo_thread->index]--;
 		pthread_mutex_unlock(&philo->fork[philo_thread->index - 1]);
 		printf(ANSI_COLOR_BLUE"%zu %zu has dropped the left fork" ANSI_COLOR_RESET
 			"\n", get_current_time() - philo->start_time, philo_thread->index);
@@ -75,6 +82,7 @@ void	philo_eat_edgecase(t_philo_thread *s_philo_thread, t_philo *philo)
 	pthread_mutex_unlock(&philo->fork[s_philo_thread->index]);
 	printf(ANSI_COLOR_BLUE"%zu %zu has dropped the left fork" ANSI_COLOR_RESET
 			"\n", get_current_time() - philo->start_time, s_philo_thread->index);
+	philo->meals_to_eat[s_philo_thread->index]--;
 	pthread_mutex_unlock(&philo->fork[s_philo_thread->biggest]);
 	printf(ANSI_COLOR_BLUE"%zu %zu has dropped his fork" ANSI_COLOR_RESET
 			"\n", get_current_time() - philo->start_time, s_philo_thread->index);	
