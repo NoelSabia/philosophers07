@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 18:55:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:42:10 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	initialize(t_philo *philo, char *argv[])
 		}
 	}
 	i = 0;
-	while (i < philo->num_of_philos)
+	while (i <= philo->num_of_philos)
 	{
 		philo->last_eaten[i] = 0;
 		i++;

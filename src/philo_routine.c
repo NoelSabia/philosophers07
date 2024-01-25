@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:09 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 19:10:22 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 21:43:38 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	*philo_life(void *arg)
 		philo_think(philo_thread, philo);
 		if (philo->philo_dead == 1)
 			return (NULL);
-		philo_eat(philo_thread, philo);
+		if (philo_eat(philo_thread, philo) == 0)
+			return (NULL);
 		if (philo->philo_dead == 1)
 			return (NULL);
 		philo_sleep(philo_thread, philo);
@@ -43,11 +44,14 @@ void	philo_think(t_philo_thread *philo_thread, t_philo *philo)
 	pthread_mutex_unlock(&philo->philo_think_mutex);
 }
 
-void	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
+int	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->time_to_eat_mutex);
 	if (philo->num_of_philos == 1)
-		ft_usleep(100000);
+	{
+		philo->last_eaten[philo_thread->index] = philo->time_to_die + 100;
+		return (0);
+	}
 	if (philo_thread->index == 0 || philo_thread->index == philo->num_of_philos)
 		philo_eat_edgecase(philo_thread, philo);
 	else
@@ -70,6 +74,7 @@ void	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 			"\n", get_current_time() - philo->start_time, philo_thread->index);
 		pthread_mutex_unlock(&philo->time_to_eat_mutex);
 	}
+	return (1);
 }
 
 void	philo_eat_edgecase(t_philo_thread *s_philo_thread, t_philo *philo)

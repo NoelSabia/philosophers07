@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 18:57:21 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 20:15:01 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	initialize_threads(t_philo *philo);
 void	join_threads(t_philo *philo);
 void	*philo_life(void *philo);
 void	philo_think(t_philo_thread *philo_thread, t_philo *philo);
-void	philo_eat(t_philo_thread *philo_thread, t_philo *philo);
+int		philo_eat(t_philo_thread *philo_thread, t_philo *philo);
 void	philo_eat_edgecase(t_philo_thread *s_philo_thread, t_philo *philo);
 void	philo_sleep(t_philo_thread *philo_thread, t_philo *philo);
 void	*monitoring(void *arg);

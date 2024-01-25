@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 18:58:47 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 19:42:46 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	*monitoring(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *)arg;
-	usleep(5);
+	usleep(1);
 	while (1)
 		if ((philo->eat_count > 0 && check_if_all_ate(philo) == 1)
 			|| check_if_dead(philo) == 1)
