@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/24 15:47:05 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:58:47 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,24 @@
 
 int	check_if_dead(t_philo *philo)
 {
-	size_t	i;
+	size_t			i;
+	size_t			time;
+	size_t			result;
 
 	i = 1;
 	while (i <= philo->num_of_philos)
 	{
-		if (get_current_time() - philo->last_eaten[i] >= philo->time_to_die)
+		if (philo->last_eaten[i] == 0)
 		{
-			printf(ANSI_COLOR_BLACK"%zu %zu died" ANSI_COLOR_RESET "\n",
-				get_current_time() - philo->last_eaten[i], i);
+			i++;
+			continue ;
+		}
+		result = get_current_time() - philo->last_eaten[i];
+		if ((result > philo->time_to_die) && (philo->last_eaten[i] != 0))
+		{
+			time = get_current_time() - philo->start_time;
+			printf(ANSI_COLOR_BLACK"%zu %zu died" RESET
+				"\n", time, i);
 			return (1);
 		}
 		i++;
@@ -30,7 +39,7 @@ int	check_if_dead(t_philo *philo)
 	return (0);
 }
 
-int check_if_all_ate(t_philo *philo)
+int	check_if_all_ate(t_philo *philo)
 {
 	size_t	i;
 	size_t	eaten;
@@ -53,12 +62,11 @@ void	*monitoring(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo *)arg;
-	ft_usleep(1);
+	usleep(5);
 	while (1)
-		if ((philo->eat_count > 0 && check_if_all_ate(philo) == 1))
-			break;
-		// if (check_if_dead(philo) == 1 || check_if_all_ate(philo, philo_thread) == 1)
-		// 	break;
+		if ((philo->eat_count > 0 && check_if_all_ate(philo) == 1)
+			|| check_if_dead(philo) == 1)
+			break ;
 	philo->philo_dead = 1;
 	return (NULL);
 }

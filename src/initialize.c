@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/23 19:56:22 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:55:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	initialize(t_philo *philo, char *argv[])
 {
-	user_input(philo, argv);
-	size_t i;
+	size_t	i;
 
+	user_input(philo, argv);
 	i = 0;
 	if (philo->eat_count != -1)
 	{
@@ -25,6 +25,12 @@ void	initialize(t_philo *philo, char *argv[])
 			philo->meals_to_eat[i] = philo->eat_count;
 			i++;
 		}
+	}
+	i = 0;
+	while (i < philo->num_of_philos)
+	{
+		philo->last_eaten[i] = 0;
+		i++;
 	}
 	initialize_mutexes(philo);
 	initialize_threads(philo);
@@ -59,6 +65,7 @@ void	initialize_mutexes(t_philo *philo)
 	}
 	pthread_mutex_init(&philo->philo, NULL);
 	pthread_mutex_init(&philo->dead, NULL);
+	i = 1;
 }
 
 void	initialize_threads(t_philo *philo)
@@ -85,11 +92,6 @@ void	initialize_threads(t_philo *philo)
 		i++;
 	}
 	ret = pthread_create(&philo->id[i], NULL, monitoring, (void *)philo);
-	if (ret != 0)
-	{
-		printf("Error: pthread_create: %s\n", strerror(ret));
-		return;
-	}
 }
 
 void	join_threads(t_philo *philo)

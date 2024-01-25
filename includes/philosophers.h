@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/24 15:45:45 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/01/25 18:57:21 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define ANSI_COLOR_GREEN   	"\x1b[32m"
 #define ANSI_COLOR_YELLOW  	"\x1b[33m"
 #define ANSI_COLOR_BLUE    	"\x1b[34m"
-#define ANSI_COLOR_RESET   	"\x1b[0m"
+#define RESET   			"\x1b[0m"
 
 /*Structures*/
 typedef struct s_philo
@@ -54,8 +54,8 @@ typedef struct s_philo
 	pthread_mutex_t	philo_think_mutex;
 	pthread_mutex_t	fork[MAX_PHILOS];
 	size_t			start_time;
-	int		last_eaten[MAX_PHILOS];
-	int		meals_to_eat[MAX_PHILOS];
+	size_t			last_eaten[MAX_PHILOS];
+	int				meals_to_eat[MAX_PHILOS];
 }						t_philo;
 
 typedef struct s_philo_thread
