@@ -17,4 +17,4 @@ Argumente:
 5. (Optional) Wie oft gegessen werden soll
 
 
-
+timer beginnt beim beginn vom essen nicht wenn sie fertig sind!
