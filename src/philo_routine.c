@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:09 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 21:43:38 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:43:49 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*philo_life(void *arg)
 void	philo_think(t_philo_thread *philo_thread, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->philo_think_mutex);
-	ft_usleep(philo->time_to_sleep);
+	ft_usleep(0);
 	printf(ANSI_COLOR_RED"%zu %zu is thinking" RESET "\n",
 		get_current_time() - philo->start_time, philo_thread->index);
 	pthread_mutex_unlock(&philo->philo_think_mutex);
@@ -46,7 +46,6 @@ void	philo_think(t_philo_thread *philo_thread, t_philo *philo)
 
 int	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 {
-	pthread_mutex_lock(&philo->time_to_eat_mutex);
 	if (philo->num_of_philos == 1)
 	{
 		philo->last_eaten[philo_thread->index] = philo->time_to_die + 100;
@@ -57,22 +56,16 @@ int	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 	else
 	{
 		pthread_mutex_lock(&philo->fork[philo_thread->index]);
-		philo->last_eaten[philo_thread->index] = 0;
-		printf(ANSI_COLOR_GREEN"%zu %zu has taken his fork" RESET
+		printf(ANSI_COLOR_GREEN"%zu %zu has taken a fork" RESET
 			"\n", get_current_time() - philo->start_time, philo_thread->index);
 		pthread_mutex_lock(&philo->fork[philo_thread->index - 1]);
-		printf(ANSI_COLOR_GREEN"%zu %zu has taken the left fork" RESET
+		printf(ANSI_COLOR_GREEN"%zu %zu has taken a fork" RESET
 			"\n", get_current_time() - philo->start_time, philo_thread->index);
 		ft_usleep(philo->time_to_eat);
-		pthread_mutex_unlock(&philo->fork[philo_thread->index]);
-		printf(ANSI_COLOR_BLUE"%zu %zu has dropped his fork" RESET
-			"\n", get_current_time() - philo->start_time, philo_thread->index);
 		philo->meals_to_eat[philo_thread->index]--;
 		philo->last_eaten[philo_thread->index] = get_current_time();
+		pthread_mutex_unlock(&philo->fork[philo_thread->index]);
 		pthread_mutex_unlock(&philo->fork[philo_thread->index - 1]);
-		printf(ANSI_COLOR_BLUE"%zu %zu has dropped the left fork" RESET
-			"\n", get_current_time() - philo->start_time, philo_thread->index);
-		pthread_mutex_unlock(&philo->time_to_eat_mutex);
 	}
 	return (1);
 }
@@ -80,21 +73,18 @@ int	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 void	philo_eat_edgecase(t_philo_thread *s_philo_thread, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork[s_philo_thread->index]);
-	philo->last_eaten[s_philo_thread->index] = 0;
-	printf(ANSI_COLOR_GREEN"%zu %zu has taken his fork"RESET"\n",
+	printf(ANSI_COLOR_GREEN"%zu %zu is eating"RESET"\n",
+		get_current_time() - philo->start_time, s_philo_thread->index);
+	printf(ANSI_COLOR_GREEN"%zu %zu has taken a fork"RESET"\n",
 		get_current_time() - philo->start_time, s_philo_thread->index);
 	pthread_mutex_lock(&philo->fork[s_philo_thread->biggest]);
-	printf(ANSI_COLOR_GREEN"%zu %zu has taken the left fork"RESET"\n",
+	printf(ANSI_COLOR_GREEN"%zu %zu has taken a fork"RESET"\n",
 		get_current_time() - philo->start_time, s_philo_thread->index);
 	ft_usleep(philo->time_to_eat);
-	pthread_mutex_unlock(&philo->fork[s_philo_thread->index]);
-	printf(ANSI_COLOR_BLUE"%zu %zu has dropped the left fork" RESET
-		"\n", get_current_time() - philo->start_time, s_philo_thread->index);
 	philo->meals_to_eat[s_philo_thread->index]--;
 	philo->last_eaten[s_philo_thread->index] = get_current_time();
+	pthread_mutex_unlock(&philo->fork[s_philo_thread->index]);
 	pthread_mutex_unlock(&philo->fork[s_philo_thread->biggest]);
-	printf(ANSI_COLOR_BLUE"%zu %zu has dropped his fork" RESET
-		"\n", get_current_time() - philo->start_time, s_philo_thread->index);
 }
 
 void	philo_sleep(t_philo_thread *philo_thread, t_philo *philo)

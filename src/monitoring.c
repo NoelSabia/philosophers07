@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 19:42:46 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:45:58 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	check_if_dead(t_philo *philo)
 		if ((result > philo->time_to_die) && (philo->last_eaten[i] != 0))
 		{
 			time = get_current_time() - philo->start_time;
-			printf(ANSI_COLOR_BLACK"%zu %zu died" RESET
-				"\n", time, i);
+			printf(ANSI_COLOR_BLACK"%zu %zu died" RESET "\n", time, i);
 			return (1);
 		}
 		i++;
