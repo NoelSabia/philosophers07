@@ -1,5 +1,5 @@
 CC		= gcc
-CFLAGS	= -Wall -Wextra #-Werror -01 -02 -03
+CFLAGS	= -Wall -Wextra -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment -Werror
 NAME	= philo
 
 SRC_PATH = src/
@@ -10,7 +10,7 @@ SRC		= main.c \
 			initialize.c \
 			monitoring.c \
 			philo_routine.c \
-			destroy.c \
+
 
 SRCm	= $(addprefix $(SRC_PATH), $(SRC))
 OBJ		= $(SRC:.c=.o)

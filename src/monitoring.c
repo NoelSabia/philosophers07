@@ -6,11 +6,21 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/11 20:45:58 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/22 15:14:53 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+
+void	print_message(char *str, t_philo *philo, int id)
+{
+	size_t	time;
+	pthread_mutex_lock(&philo->write_lock);
+	time = get_current_time() - philo->start_time;
+	if (philo->philo_dead == 0)
+		printf(ANSI_COLOR_BLACK"%zu %d %s" RESET "\n", time, id, str);
+	pthread_mutex_unlock(&philo->write_lock);
+}
 
 int	check_if_dead(t_philo *philo)
 {
@@ -29,6 +39,8 @@ int	check_if_dead(t_philo *philo)
 		result = get_current_time() - philo->last_eaten[i];
 		if ((result > philo->time_to_die) && (philo->last_eaten[i] != 0))
 		{
+			if (result == 18446744073709551615ULL)
+				continue;
 			time = get_current_time() - philo->start_time;
 			printf(ANSI_COLOR_BLACK"%zu %zu died" RESET "\n", time, i);
 			return (1);

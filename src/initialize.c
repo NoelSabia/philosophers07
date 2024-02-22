@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/01/25 19:42:10 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/22 16:55:34 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	initialize_mutexes(t_philo *philo)
 	}
 	pthread_mutex_init(&philo->philo, NULL);
 	pthread_mutex_init(&philo->dead, NULL);
-	i = 1;
 }
 
 void	initialize_threads(t_philo *philo)
@@ -75,13 +74,10 @@ void	initialize_threads(t_philo *philo)
 	t_philo_thread	philo_threads[MAX_PHILOS];
 
 	i = 1;
-	philo_threads->biggest = 0;
 	while (i <= philo->num_of_philos)
 	{
 		philo_threads[i].philo = philo;
 		philo_threads[i].index = i;
-		if (i > philo_threads->biggest)
-			philo_threads->biggest = i;
 		ret = pthread_create(&philo->id[i], NULL,
 				philo_life, &philo_threads[i]);
 		if (ret != 0)
@@ -92,6 +88,8 @@ void	initialize_threads(t_philo *philo)
 		i++;
 	}
 	ret = pthread_create(&philo->id[i], NULL, monitoring, (void *)philo);
+	if (philo->num_of_philos % 2 == 1)
+		ft_usleep(10);
 }
 
 void	join_threads(t_philo *philo)

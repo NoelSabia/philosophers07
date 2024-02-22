@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:56:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/11 19:08:49 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/22 14:32:13 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ int	main(int argc, char *argv[])
 	if (arg_checker(argc, argv) == 0)
 		return (0);
 	initialize(&philo, argv);
-	destroy(&philo);
 	return (0);
 }

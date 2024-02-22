@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/11 20:20:48 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/22 15:16:41 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_philo
 	size_t			num_think;
 	pthread_mutex_t	philo_think_mutex;
 	pthread_mutex_t	fork[MAX_PHILOS];
+	pthread_mutex_t	write_lock;
 	size_t			start_time;
 	size_t			last_eaten[MAX_PHILOS];
 	int				meals_to_eat[MAX_PHILOS];
@@ -80,4 +81,4 @@ void	philo_sleep(t_philo_thread *philo_thread, t_philo *philo);
 void	*monitoring(void *arg);
 int		ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
-void	destroy(t_philo *philo);
+void	print_message(char *str, t_philo *philo, int id);
