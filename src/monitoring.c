@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/22 15:14:53 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:32:50 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	check_if_all_ate(t_philo *philo)
 	size_t	i;
 	size_t	eaten;
 
-	i = 1;
+	i = 0;
 	eaten = 0;
-	while (i <= philo->num_of_philos)
+	while (i < philo->num_of_philos)
 	{
 		if (philo->meals_to_eat[i] <= 0)
 			eaten++;

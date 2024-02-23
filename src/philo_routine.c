@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:09 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/22 16:41:30 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:31:56 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ int	philo_eat(t_philo_thread *philo_thread, t_philo *philo)
 		philo->last_eaten[philo_thread->index] = philo->time_to_die + 100;
 		return (0);
 	}
-
 	print_message("is eating", philo, philo_thread->index);
 	ft_usleep(philo->time_to_eat);
-	philo->meals_to_eat[philo_thread->index]--;
+	philo->meals_to_eat[philo_thread->index - 1]--;
 	philo->last_eaten[philo_thread->index] = get_current_time();
 	if (philo_thread->index == 1)
 		pthread_mutex_unlock(&philo->fork[philo->num_of_philos]);	
-	else
+	else 
 		pthread_mutex_unlock(&philo->fork[philo_thread->index - 1]);
 	pthread_mutex_unlock(&philo->fork[philo_thread->index]);
 	return (1);

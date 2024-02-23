@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/22 16:55:34 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 10:51:55 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	initialize(t_philo *philo, char *argv[])
 	initialize_mutexes(philo);
 	initialize_threads(philo);
 	join_threads(philo);
-}
+	}
 
 void	user_input(t_philo *philo, char *argv[])
 {
@@ -71,18 +71,24 @@ void	initialize_threads(t_philo *philo)
 {
 	size_t			i;
 	int				ret;
-	t_philo_thread	philo_threads[MAX_PHILOS];
+	t_philo_thread	*philo_thread;
 
-	i = 1;
-	while (i <= philo->num_of_philos)
+	i = 0;
+	while (i < philo->num_of_philos)
 	{
-		philo_threads[i].philo = philo;
-		philo_threads[i].index = i;
+		philo_thread = malloc(sizeof(t_philo_thread));
+		if (!philo_thread) {
+			printf("Error: malloc failed\n");
+			return;
+		}
+		philo_thread->philo = philo;
+		philo_thread->index = i + 1;
 		ret = pthread_create(&philo->id[i], NULL,
-				philo_life, &philo_threads[i]);
+				philo_life, philo_thread);
 		if (ret != 0)
 		{
 			printf("Error: pthread_create: %s\n", strerror(ret));
+			free(philo_thread);
 			return ;
 		}
 		i++;
@@ -98,7 +104,7 @@ void	join_threads(t_philo *philo)
 	int		ret;
 
 	i = 1;
-	while (i <= philo->num_of_philos)
+	while (i < philo->num_of_philos)
 	{
 		ret = pthread_join(philo->id[i], NULL);
 		if (ret != 0)

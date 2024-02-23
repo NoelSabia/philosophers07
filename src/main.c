@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:56:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/22 14:32:13 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 10:50:19 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,18 @@ int	helper(t_philo *philo)
 
 int	main(int argc, char *argv[])
 {
-	t_philo			philo;
+	t_philo			*philo;
+	t_philo_thread	*philo_threads;
 
 	if (arg_checker(argc, argv) == 0)
 		return (0);
-	initialize(&philo, argv);
+	philo = malloc(sizeof(t_philo));
+	if (!philo)
+	{
+		printf("Error: malloc failed\n");
+		return (0);
+	}
+	initialize(philo, argv);
+	free(philo);
 	return (0);
 }

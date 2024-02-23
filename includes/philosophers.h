@@ -6,7 +6,7 @@
 /*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/22 15:16:41 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:26:43 by nsabia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,4 @@ void	*monitoring(void *arg);
 int		ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
 void	print_message(char *str, t_philo *philo, int id);
+void 	free_philo_thread(t_philo *philo);
