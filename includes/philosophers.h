@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:38:30 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/23 11:26:43 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 13:27:35 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	*philo_life(void *philo);
 void	philo_think(t_philo_thread *philo_thread, t_philo *philo);
 int		philo_eat(t_philo_thread *philo_thread, t_philo *philo);
 void	philo_eat_edgecase(t_philo_thread *s_philo_thread, t_philo *philo);
-void	philo_sleep(t_philo_thread *philo_thread, t_philo *philo);
+int		philo_sleep(t_philo_thread *philo_thread, t_philo *philo);
 void	*monitoring(void *arg);
 int		ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
 void	print_message(char *str, t_philo *philo, int id);
-void 	free_philo_thread(t_philo *philo);
+void	free_philo_thread(t_philo *philo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:21:04 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/23 10:51:55 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 13:53:08 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	initialize(t_philo *philo, char *argv[])
 	initialize_mutexes(philo);
 	initialize_threads(philo);
 	join_threads(philo);
-	}
+}
 
 void	user_input(t_philo *philo, char *argv[])
 {
@@ -77,17 +77,14 @@ void	initialize_threads(t_philo *philo)
 	while (i < philo->num_of_philos)
 	{
 		philo_thread = malloc(sizeof(t_philo_thread));
-		if (!philo_thread) {
-			printf("Error: malloc failed\n");
-			return;
-		}
+		if (!philo_thread)
+			return ;
 		philo_thread->philo = philo;
 		philo_thread->index = i + 1;
 		ret = pthread_create(&philo->id[i], NULL,
 				philo_life, philo_thread);
 		if (ret != 0)
 		{
-			printf("Error: pthread_create: %s\n", strerror(ret));
 			free(philo_thread);
 			return ;
 		}

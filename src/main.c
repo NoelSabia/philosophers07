@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:56:41 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/23 10:50:19 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:32:30 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	helper(t_philo *philo)
 int	main(int argc, char *argv[])
 {
 	t_philo			*philo;
-	t_philo_thread	*philo_threads;
 
 	if (arg_checker(argc, argv) == 0)
 		return (0);

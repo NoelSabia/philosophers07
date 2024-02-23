@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsabia <nsabia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkauker <jkauker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 09:22:12 by nsabia            #+#    #+#             */
-/*   Updated: 2024/02/23 11:32:50 by nsabia           ###   ########.fr       */
+/*   Updated: 2024/02/23 13:19:22 by jkauker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_message(char *str, t_philo *philo, int id)
 {
 	size_t	time;
+
 	pthread_mutex_lock(&philo->write_lock);
 	time = get_current_time() - philo->start_time;
 	if (philo->philo_dead == 0)
@@ -40,7 +41,7 @@ int	check_if_dead(t_philo *philo)
 		if ((result > philo->time_to_die) && (philo->last_eaten[i] != 0))
 		{
 			if (result == 18446744073709551615ULL)
-				continue;
+				continue ;
 			time = get_current_time() - philo->start_time;
 			printf(ANSI_COLOR_BLACK"%zu %zu died" RESET "\n", time, i);
 			return (1);
